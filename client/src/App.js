@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import api from './api';
 import logo from './logo.svg';
 import './App.css';
 
@@ -11,7 +11,7 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    axios.get("http://localhost:3000/api/countries")
+    api.service.get("/countries")
       .then(response => {
         console.log(response)
         this.setState({
