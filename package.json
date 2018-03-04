@@ -1,0 +1,12 @@
+{
+  "name": "fullstack-2018-03-02",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "preinstall": "echo --- preinstall --- && (cd client && npm install) && (cd server && npm install)",
+    "prestart": "echo --- prestart --- && (cd client && npm run build)",
+    "start": "echo --- start --- && (cd server && npm start)",
+    "dev:server": "cd server && nodemon ./bin/www",
+    "dev:client": "cd client && npm start"
+  }
+}
