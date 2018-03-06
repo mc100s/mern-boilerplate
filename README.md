@@ -1,4 +1,4 @@
-# Fullstack boilerplate
+# MERN boilerplate | Ironhack Fullstack Application
 
 ## Global information
 
@@ -22,7 +22,7 @@ package.json
 
 ## Commands
 
-*To install all the packages*
+**To install all the packages**
 ```sh
 $ npm install
 # OR
@@ -30,19 +30,19 @@ $ (cd server && npm install)
 $ (cd client && npm install)
 ```
 
-*To install a package for the server*
+**To install a package for the server**
 ```sh
 $ cd server
 $ npm install --save axios
 ```
 
-*To install a package for the client*
+**To install a package for the client**
 ```sh
 $ cd client
 $ npm install --save axios
 ```
 
-*To run the server and the client*
+**To run the server and the client**
 ```sh
 # Open a first terminal
 $ npm run dev:server
@@ -53,19 +53,19 @@ $ npm run dev:client
 # Run the client on http://localhost:3000/
 ```
 
-So now if you want 
+So now you can go to 
 - http://localhost:3030/api/: A simple API call
 - http://localhost:3030/: The website based on client/build (that you can update with `$ (cd client && npm run build)`)
 - http://localhost:3000/: The last version of your React application that is calling your API with the base url "http://localhost:3030/api/"
 
 
-*Some Heroku commands*
+**Some Heroku commands**
 ```sh
 $ heroku create
 $ git push heroku master
 $ heroku logs
 ```
 
-## Sources
+## Sources
 
 - https://daveceddia.com/create-react-app-express-production/
