@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3000/api',
+  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3030/api',
 });
 
 const errHandler = err => {
@@ -14,6 +14,13 @@ export default {
   //   return service
   // }
   service: service,
+
+  getCountries() {
+    return service
+      .get('/countries')
+      .then(res => res.data)
+      .catch(errHandler);
+  }
   // signup(userInfo) {
   //   const formData = new FormData();
   //   Object.keys(userInfo).forEach(key => formData.append(key, userInfo[key]));

@@ -12,14 +12,23 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    api.service.get("/countries")
-      .then(response => {
-        console.log(response)
+    api.getCountries()
+      .then(countries => {
+        console.log(countries)
         this.setState({
-          countries: response.data
+          countries: countries
         })
       })
       .catch(err => console.log(err))
+    // // The same thing
+    // api.service.get("/countries")
+    //   .then(response => {
+    //     console.log(response)
+    //     this.setState({
+    //       countries: response.data
+    //     })
+    //   })
+    //   .catch(err => console.log(err))
   }
   render() {                
     return (

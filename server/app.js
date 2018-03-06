@@ -6,7 +6,9 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
-var countries = require('./routes/countries');
+var authRoutes = require('./routes/auth');
+var countriesRoutes = require('./routes/countries');
+var usersRoutes = require('./routes/users');
 
 require('./configs/database');
 
@@ -34,7 +36,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 
-app.use('/api/countries', countries);
+app.use('/api', authRoutes);
+app.use('/api/countries', countriesRoutes);
+app.use('/api/users', usersRoutes);
 
 
 app.get('*', (req, res) => {
