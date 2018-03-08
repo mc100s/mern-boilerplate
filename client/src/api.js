@@ -18,13 +18,20 @@ export default {
     .then(res => res.data)
     .catch(errHandler);
   },
+
+  postCountries(data) {
+    return service
+      .post('/countries', data)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
   
-    getSecret() {
-      return service
-        .get('/secret')
-        .then(res => res.data)
-        .catch(errHandler);
-    },
+  getSecret() {
+    return service
+      .get('/secret')
+      .then(res => res.data)
+      .catch(errHandler);
+  },
   
   // signup(userInfo) {
   //   const formData = new FormData();

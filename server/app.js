@@ -5,7 +5,12 @@ var logger = require('morgan');
 // var cookieParser = require('cookie-parser'); // Not useful anymore
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var passport = require('passport');
+const { Strategy, ExtractJwt } = require("passport-jwt");
 
+const config = require("./config");
+
+var User = require('./models/user');
 var authRoutes = require('./routes/auth');
 var countriesRoutes = require('./routes/countries');
 var usersRoutes = require('./routes/users');
@@ -35,6 +40,36 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 
+
+app.use(passport.initialize());
+// Create the strategy for JWT
+const strategy = new Strategy(
+  {
+    // this is a config we pass to the strategy
+    // it needs to secret to decrypt the payload of the
+    // token.
+    secretOrKey: config.jwtSecret,
+    // This options tells the strategy to extract the token
+    // from the header of the request
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+  },
+  (payload, done) => {
+    console.log("DEBUG payload", payload)
+    // payload is the object we encrypted at the route /api/token
+    // We get the user id, make sure the user exist by looking it up
+    User.findById(payload.id).then(user => {
+      console.log("Yo", user)
+      if (user) {
+        // make the user accessible in req.user
+        done(null, user);
+      } else {
+        done(new Error("User not found"));
+      }
+    });
+  }
+);
+// tell pasport to use it
+passport.use(strategy);
 
 app.use('/api', authRoutes);
 app.use('/api/countries', countriesRoutes);
