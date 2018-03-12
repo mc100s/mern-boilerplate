@@ -3,9 +3,9 @@ const Country = require('../models/country')
 
 var router = express.Router();
 
-router.get('/process', function(req, res, next) {
-  res.json(process.env)
-})
+// router.get('/process', function(req, res, next) {
+//   res.json(process.env)
+// })
 
 
 
@@ -15,6 +15,10 @@ router.get('/', function(req, res, next) {
       res.json(countries);
     })
     .catch(err => next(err))
+});
+
+router.get('/test', function(req, res, next) {
+  res.json('Hello Ironhack')
 });
 
 router.get('/static-sample', function(req, res, next) {

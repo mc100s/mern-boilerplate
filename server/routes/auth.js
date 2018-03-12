@@ -5,27 +5,12 @@ const jwt = require('jwt-simple');
 const passport = require('passport');
 const config = require('../config');
 
-const cloudinary = require('cloudinary');
-const cloudinaryStorage = require('multer-storage-cloudinary');
-const multer = require('multer');
 
-const storage = cloudinaryStorage({
-  cloudinary,
-  folder: 'my-images',
-  allowedFormats: ['jpg', 'png', 'gif'],
-});
-
-const parser = multer({ storage });
-
-// router.post('/signup', parser.single('picture'), (req, res, next) => {
 router.post('/signup', (req, res, next) => {
-  // extract the info we need from the body
-  // of the request
-  console.log("DEBUG req.body", req.body)
-  const { username, name, password } = req.body;
-  const { file } = req;
+  // extract the info we need from the body of the request
+  const { email, name, password } = req.body;
   const user = new User({
-    username,
+    email,
     name
   });
 
@@ -37,11 +22,11 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   const authenticate = User.authenticate();
-  const { username, password } = req.body;
-  // check if we have a username and password
-  if (username && password) {
+  const { email, password } = req.body;
+  // check if we have a email and password
+  if (email && password) {
     // test if the credentials are valid
-    authenticate(username, password, (err, user, failed) => {
+    authenticate(email, password, (err, user, failed) => {
       if (err) {
         // an unexpected error from the database
         return next(err);
@@ -69,7 +54,6 @@ router.post('/login', (req, res, next) => {
         res.json({
           token,
           name: user.name,
-          // picture: user.picture,
         });
       }
     });
