@@ -14,7 +14,7 @@ class Secret extends Component {
     api.getSecret()
       .then(data => {
         this.setState({
-          secret: data
+          secret: data.answerToLifeTheUniverseAndEverything
         })
       })
   }

@@ -5,6 +5,7 @@ import Countries from './Countries';
 import AddCountry from './AddCountry';
 import Secret from './Secret';
 import Login from './Login';
+import Signup from './Signup';
 import api from '../api';
 import logo from '../logo.svg';
 import './App.css';
@@ -15,7 +16,13 @@ class App extends Component {
     this.state = {
       countries: []
     }
+    api.loadUser();
   }
+
+  handleLogoutClick(e) {
+    api.logout()
+  }
+
   render() {                
     return (
       <div className="App">
@@ -25,13 +32,16 @@ class App extends Component {
           <Link to="/">Home</Link> 
           <Link to="/countries">Countries</Link> 
           <Link to="/add-country">Add country</Link> 
-          <Link to="/login">Login</Link> 
+          {!api.isLoggedIn() && <Link to="/signup">Signup</Link> }
+          {!api.isLoggedIn() && <Link to="/login">Login</Link> }
+          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link> }
           <Link to="/secret">Secret</Link> 
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/countries" component={Countries} />
           <Route path="/add-country" component={AddCountry} />
+          <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/secret" component={Secret} />
           <Route render={() => <h2>404</h2>} />

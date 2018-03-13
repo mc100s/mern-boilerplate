@@ -25,7 +25,7 @@ router.get('/', (req, res, next) => {
     })
 });
 
-// Route to add a picture on one user
+// Route to add a picture on one user with Cloudinary
 // To perform the request throw Postman, you need
 // - Endpoint: POST http://localhost:3030/api/users/picture
 // - Select: Body > form-data

@@ -33,23 +33,25 @@ export default {
       .catch(errHandler);
   },
   
-  // signup(userInfo) {
-  //   const formData = new FormData();
-  //   Object.keys(userInfo).forEach(key => formData.append(key, userInfo[key]));
-  //   return service
-  //     .post('/signup', formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     })
-  //     .then(res => res.data)
-  //     .catch(errHandler);
-  // },
+  signup(userInfo) {
+    const formData = new FormData();
+    Object.keys(userInfo).forEach(key => formData.append(key, userInfo[key]));
+    console.log("DEBUG formData", formData);
+    
+    return service
+      .post('/signup', formData, {
+        // headers: {
+        //   'Content-Type': 'multipart/form-data',
+        // },
+      })
+      .then(res => res.data)
+      .catch(errHandler);
+  },
 
-  login(username, password) {
+  login(email, password) {
     return service
       .post('/login', {
-        username,
+        email,
         password,
       })
       .then(res => {
@@ -77,4 +79,8 @@ export default {
     }
     return false;
   },
+
+  isLoggedIn() {
+    return localStorage.getItem('user') != null
+  }
 };
