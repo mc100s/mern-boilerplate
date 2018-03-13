@@ -63,4 +63,13 @@ router.post('/login', (req, res, next) => {
   }
 });
 
+// Example of secret route
+// If you use Postman, don't forget to add "Authorization" "Bearer <your-JWT>" (without "<" and ">")
+router.get('/secret', passport.authenticate("jwt", config.jwtSession), (req, res, next) => {
+  res.json({
+    answerToLifeTheUniverseAndEverything: 42,
+    user: req.user
+  });
+});
+
 module.exports = router;

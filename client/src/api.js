@@ -5,22 +5,34 @@ const service = axios.create({
 });
 
 const errHandler = err => {
-  console.error(err.response.data);
-  throw err.response.data;
+  console.error(err);
+  throw err;
 };
 
 export default {
-  // service() {
-  //   return service
-  // }
   service: service,
-
+  
   getCountries() {
     return service
-      .get('/countries')
+    .get('/countries')
+    .then(res => res.data)
+    .catch(errHandler);
+  },
+
+  postCountries(data) {
+    return service
+      .post('/countries', data)
       .then(res => res.data)
       .catch(errHandler);
-  }
+  },
+  
+  getSecret() {
+    return service
+      .get('/secret')
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+  
   // signup(userInfo) {
   //   const formData = new FormData();
   //   Object.keys(userInfo).forEach(key => formData.append(key, userInfo[key]));
@@ -34,41 +46,35 @@ export default {
   //     .catch(errHandler);
   // },
 
-  // login(username, password) {
-  //   return service
-  //     .post('/login', {
-  //       username,
-  //       password,
-  //     })
-  //     .then(res => {
-  //       const { data } = res;
-  //       localStorage.setItem('user', JSON.stringify(data));
-  //       axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
-  //       return data;
-  //     })
-  //     .catch(errHandler);
-  // },
+  login(username, password) {
+    return service
+      .post('/login', {
+        username,
+        password,
+      })
+      .then(res => {
+        console.log("DEBUG res", res)
+        const { data } = res;
+        localStorage.setItem('user', JSON.stringify(data));
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
+        return data;
+      })
+      .catch(errHandler);
+  },
 
-  // getSecret() {
-  //   return service
-  //     .get('/secret')
-  //     .then(res => res.data)
-  //     .catch(errHandler);
-  // },
+  logout() {
+    delete axios.defaults.headers.common['Authorization'];
+    localStorage.removeItem('user');
+  },
 
-  // logout() {
-  //   delete axios.defaults.headers.common['Authorization'];
-  //   localStorage.removeItem('user');
-  // },
-
-  // loadUser() {
-  //   const userData = localStorage.getItem('user');
-  //   if (!userData) return false;
-  //   const user = JSON.parse(userData);
-  //   if (user.token && user.name) {
-  //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
-  //     return user;
-  //   }
-  //   return false;
-  // },
+  loadUser() {
+    const userData = localStorage.getItem('user');
+    if (!userData) return false;
+    const user = JSON.parse(userData);
+    if (user.token && user.name) {
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
+      return user;
+    }
+    return false;
+  },
 };
