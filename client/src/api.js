@@ -34,16 +34,8 @@ export default {
   },
   
   signup(userInfo) {
-    const formData = new FormData();
-    Object.keys(userInfo).forEach(key => formData.append(key, userInfo[key]));
-    console.log("DEBUG formData", formData);
-    
     return service
-      .post('/signup', formData, {
-        // headers: {
-        //   'Content-Type': 'multipart/form-data',
-        // },
-      })
+      .post('/signup', userInfo)
       .then(res => res.data)
       .catch(errHandler);
   },
