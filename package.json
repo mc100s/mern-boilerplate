@@ -8,8 +8,5 @@
     "start": "echo --- start --- && cd server && npm start",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run start"
-  },
-  "dependencies": {
-    "passport-jwt": "^3.0.1"
   }
 }
