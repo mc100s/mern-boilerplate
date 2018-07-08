@@ -1,5 +1,6 @@
 # MERN boilerplate | Ironhack Fullstack Application
 
+
 ## Global information
 
 ### Directory structure
@@ -21,6 +22,22 @@ package.json
 ```
 
 ## Commands
+
+**To download the boilerplate and link it with your GitHub project**
+
+(replace `<my-project>` and `<https://github.com/user/my-project.git>` by what you want, without `<` and `>`).
+
+```sh
+# Clone the project with only the last commit and save it in the folder <my-project>
+$ git clone --depth=1 https://github.com/mc100s/mern-boilerplate.git <my-project>
+
+$ cd <my-project>
+$ rm -rf .git
+
+# Set your GitHub repository as the "origin" remote repository
+$ git remote add origin <https://github.com/user/my-project.git>
+```
+
 
 **To install all the packages**
 ```sh
@@ -59,7 +76,7 @@ So now you can go to
 - http://localhost:3000/: The last version of your React application that is calling your API with the base url "http://localhost:3030/api/"
 
 
-## Example in the code
+## Example in the code
 
 ### `server/routes/auth.js`
 
