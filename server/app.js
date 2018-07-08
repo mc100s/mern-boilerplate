@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -7,13 +9,14 @@ const cors = require('cors');
 const passport = require('passport');
 const { Strategy, ExtractJwt } = require("passport-jwt");
 
-const config = require("./config");
+const config = require("./configs/index");
 var User = require('./models/user');
 var authRoutes = require('./routes/auth');
 var countriesRoutes = require('./routes/countries');
 var usersRoutes = require('./routes/users');
 
 require('./configs/database');
+require('./configs/cloudinary');
 
 
 const app = express();

@@ -14,9 +14,9 @@ export default {
   
   getCountries() {
     return service
-    .get('/countries')
-    .then(res => res.data)
-    .catch(errHandler);
+      .get('/countries')
+      .then(res => res.data)
+      .catch(errHandler);
   },
 
   postCountries(data) {
@@ -47,7 +47,6 @@ export default {
         password,
       })
       .then(res => {
-        console.log("DEBUG res", res)
         const { data } = res;
         localStorage.setItem('user', JSON.stringify(data));
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
@@ -74,5 +73,19 @@ export default {
 
   isLoggedIn() {
     return localStorage.getItem('user') != null
-  }
+  },
+
+
+  addPicture(file) {
+    const formData = new FormData();
+    formData.append("picture", file)
+    return service
+      .post('/users/first-user/pictures', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then(res => res.data)
+      .catch(errHandler);
+  },
 };

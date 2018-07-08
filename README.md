@@ -18,8 +18,22 @@ server/
   public/
   routes/
   package.json
+.gitignore
 package.json
+README.md
 ```
+
+### Files to add
+
+You should have a `server/.env` file, with for example the following values:
+```
+CLOUDINARY_CLOUD_NAME=......
+CLOUDINARY_API_KEY=......
+CLOUDINARY_API_SECRET=......
+JWT_SECRET=......
+MONGODB_URI=......
+```
+
 
 ## Commands
 
@@ -88,7 +102,7 @@ So now you can go to
 ### `server/routes/users.js`
 
 - `router.get('/')`: Route to get all users
-- `router.post('/picture-one-user')`: Route to add a picture on one user with Cloudinary
+- `router.post('/first-user/pictures')`: Route to add a picture on one user with Cloudinary
 
 <!-- TODO: give instructions for Cloudinary -->
 <!-- TODO: give instructions for route guards -->
