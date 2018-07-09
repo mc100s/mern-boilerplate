@@ -47,6 +47,7 @@ $ git clone --depth=1 https://github.com/mc100s/mern-boilerplate.git <my-project
 
 $ cd <my-project>
 $ rm -rf .git
+$ git init
 
 # Set your GitHub repository as the "origin" remote repository
 $ git remote add origin <https://github.com/user/my-project.git>
