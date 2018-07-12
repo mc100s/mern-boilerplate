@@ -64,7 +64,7 @@ export default {
     const userData = localStorage.getItem('user');
     if (!userData) return false;
     const user = JSON.parse(userData);
-    if (user.token && user.name) {
+    if (user.token) {
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
       return user;
     }
