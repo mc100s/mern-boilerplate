@@ -1,6 +1,6 @@
 {
-  "name": "fullstack-2018-03-02",
-  "version": "0.0.0",
+  "name": "mern-boilerplate",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "preinstall": "echo --- preinstall --- && cd client && npm install && cd .. && cd server && npm install && cd ..",
@@ -8,12 +8,5 @@
     "start": "echo --- start --- && cd server && npm start",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run start"
-  },
-  "dependencies": {
-    "axios": "^0.18.0",
-    "cors": "^2.8.4",
-    "react-cookie": "^3.0.4",
-    "react-router-dom": "^4.3.1",
-    "universal-cookie": "^3.0.4"
   }
 }

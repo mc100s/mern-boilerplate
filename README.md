@@ -151,13 +151,13 @@ If you want to execute something on the server, for example a seed, you can use 
 
 Example:
 ```
-$ heroku run node server/bin/seeds/seeds.js
+$ heroku run node server/bin/seeds.js
 ```
 
 
 ### To Open MongoLab
 
-You can either go on the Heroku project page ("Overview" tab) or type the following commad:
+You can either go on the Heroku project page ("Overview" tab) or type the following command:
 
 ```
 $ heroku addons:open mongolab
