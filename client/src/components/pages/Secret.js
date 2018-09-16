@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
-import api from '../api';
+import api from '../../api';
 // import './Secret.css';
 
 class Secret extends Component {
@@ -14,11 +14,11 @@ class Secret extends Component {
     api.getSecret()
       .then(data => {
         this.setState({
-          secret: data.answerToLifeTheUniverseAndEverything
+          secret: data.secret
         })
       })
   }
-  render() {                
+  render() {
     return (
       <div className="Secret">
         <h2>Secret</h2>

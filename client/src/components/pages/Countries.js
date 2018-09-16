@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '../api';
+import api from '../../api';
 
 class Countries extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Countries extends Component {
       })
       .catch(err => console.log(err))
   }
-  render() {                
+  render() {
     return (
       <div className="Countries">
         <h2>List of countries</h2>

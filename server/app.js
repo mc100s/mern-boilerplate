@@ -1,70 +1,53 @@
-require('dotenv').config()
+require('dotenv').config();
 
-const express = require('express');
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const passport = require('passport');
-const { Strategy, ExtractJwt } = require("passport-jwt");
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const favicon = require('serve-favicon');
+const mongoose = require('mongoose');
+const logger = require('morgan');
+const path = require('path');
 
-const config = require("./configs/index");
-var User = require('./models/user');
-var authRoutes = require('./routes/auth');
-var countriesRoutes = require('./routes/countries');
-var usersRoutes = require('./routes/users');
+const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
 
 require('./configs/database');
-require('./configs/cloudinary');
 
+const app_name = require('./package.json').name;
+const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200,
+  credentials: true
+}));
 
+// Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // Set the public folder to "~/client/build/"
-// Example: http://localhost:3030/favicon.ico => Display "~/client/build/favicon.ico"
+// Example: http://localhost:5000/favicon.ico => Display "~/client/build/favicon.ico"
 app.use(express.static(path.join(__dirname, '../client/build')));
 
+// Enable authentication using session + passport
+app.use(session({
+  secret: 'irongenerator',
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}))
+require('./passport')(app);
 
-app.use(passport.initialize());
-// Create the strategy for JWT
-const strategy = new Strategy(
-  {
-    // this is a config we pass to the strategy
-    // it needs to secret to decrypt the payload of the
-    // token.
-    secretOrKey: config.jwtSecret,
-    // This options tells the strategy to extract the token
-    // from the header of the request
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
-  },
-  (payload, done) => {
-    // payload is the object we encrypted at the route /api/token
-    // We get the user id, make sure the user exist by looking it up
-    User.findById(payload.id).then(user => {
-      if (user) {
-        // make the user accessible in req.user
-        done(null, user);
-      } else {
-        done(new Error("User not found"));
-      }
-    });
-  }
-);
-// tell pasport to use it
-passport.use(strategy);
 
-// List all your API routes
-app.use('/api', authRoutes);
-app.use('/api/countries', countriesRoutes);
-app.use('/api/users', usersRoutes);
-
+app.use('/api', require('./routes/index'));
+app.use('/api', require('./routes/auth'));
+app.use('/api/countries', require('./routes/countries'));
 
 // For any routes that starts with "/api", catch 404 and forward to error handler
 app.use('/api/*', (req, res, next) => {
@@ -78,16 +61,21 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-
 // Error handler
 app.use((err, req, res, next) => {
-  err.status = err.status || 500;
   console.error("----- An error happened -----");
   console.error(err);
-  if (process.env.NODE_ENV === 'production')
-    res.json(err); // A limited amount of information sent in production
-  else
-    res.json(JSON.parse(JSON.stringify(err, Object.getOwnPropertyNames(err))));
+
+  // only render if the error ocurred before sending the response
+  if (!res.headersSent) {
+    res.status(err.status || 500);
+
+    // A limited amount of information sent in production
+    if (process.env.NODE_ENV === 'production')
+      res.json(err);
+    else
+      res.json(JSON.parse(JSON.stringify(err, Object.getOwnPropertyNames(err))));
+  }
 });
 
 module.exports = app;

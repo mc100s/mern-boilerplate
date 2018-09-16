@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
-import api from '../api';
+import api from '../../api';
 // import './AddCountry.css';
 
 
@@ -20,7 +19,7 @@ class AddCountry extends Component {
   handleInputChange(stateFieldName, event) {
     let newState = {}
     newState[stateFieldName] = event.target.value
-  
+
     this.setState(newState)
   }
 
@@ -53,15 +52,15 @@ class AddCountry extends Component {
         console.log('ERROR')
       })
   }
-  render() {                
+  render() {
     return (
       <div className="AddCountry">
         <h2>Add country</h2>
         <form>
-          Name: <input type="text" value={this.state.name} onChange={(e) => {this.handleInputChange("name", e)}} /> <br/>
-          Capitals <input type="text" value={this.state.capitals} onChange={(e) => {this.handleInputChange("capitals", e)}}  /> <br/>
-          Area <input type="number" value={this.state.area} onChange={(e) => {this.handleInputChange("area", e)}}  /> <br/>
-          Description <textarea value={this.state.description} cols="30" rows="10" onChange={(e) => {this.handleInputChange("description", e)}} ></textarea> <br/>
+          Name: <input type="text" value={this.state.name} onChange={(e) => { this.handleInputChange("name", e) }} /> <br />
+          Capitals: <input type="text" value={this.state.capitals} onChange={(e) => { this.handleInputChange("capitals", e) }} /> <br />
+          Area: <input type="number" value={this.state.area} onChange={(e) => { this.handleInputChange("area", e) }} /> <br />
+          Description: <textarea value={this.state.description} cols="30" rows="10" onChange={(e) => { this.handleInputChange("description", e) }} ></textarea> <br />
           <button onClick={(e) => this.handleClick(e)}>Create country</button>
         </form>
         <div style={{

@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
-const countrySchema = new mongoose.Schema({  
+const countrySchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'The country name is required']
+    required: [true, 'The country name is required'],
+    minlength: 1
   },
   capitals: {
     type: [String],

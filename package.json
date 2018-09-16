@@ -8,5 +8,12 @@
     "start": "echo --- start --- && cd server && npm start",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run start"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cors": "^2.8.4",
+    "react-cookie": "^3.0.4",
+    "react-router-dom": "^4.3.1",
+    "universal-cookie": "^3.0.4"
   }
 }

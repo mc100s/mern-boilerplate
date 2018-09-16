@@ -5,9 +5,9 @@
 
 ### Directory structure
 ```
+.vscode/
 client/
   build/
-  node_modules/
   public/
   src/
   package.json
@@ -15,8 +15,10 @@ server/
   bin/
   configs/
   models/
-  public/
+  passport/
   routes/
+  app.js
+  middlewares.js
   package.json
 .gitignore
 package.json
@@ -78,7 +80,7 @@ $ npm install --save axios
 ```sh
 # Open a first terminal
 $ npm run dev:server
-# Run the server on http://localhost:3030/
+# Run the server on http://localhost:5000/
 
 # Open a second terminal
 $ npm run dev:client
@@ -86,9 +88,9 @@ $ npm run dev:client
 ```
 
 So now you can go to 
-- http://localhost:3030/api/: A simple API call
-- http://localhost:3030/: The website based on client/build (that you can update with `$ (cd client && npm run build)`)
-- http://localhost:3000/: The last version of your React application that is calling your API with the base url "http://localhost:3030/api/"
+- http://localhost:5000/api/: A simple API call
+- http://localhost:5000/: The website based on client/build (that you can update with `$ (cd client && npm run build)`)
+- http://localhost:3000/: The last version of your React application that is calling your API with the base url "http://localhost:5000/api/"
 
 
 ## Example in the code
@@ -111,7 +113,6 @@ So now you can go to
 ### `server/routes/countries.js`
 
 - `router.get('/')`: Route to get all countries
-- `router.get('/static-sample')`: Route to get a static sample of countries
 - `router.post('/')`: Route to add a country
 
 
@@ -170,6 +171,3 @@ $ heroku logs
 ```
 
 
-## Sources
-
-- https://daveceddia.com/create-react-app-express-production/
