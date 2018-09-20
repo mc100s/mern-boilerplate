@@ -7,6 +7,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
+const nocache = require('nocache')
 
 const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
@@ -18,11 +19,14 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:3000',
-  optionsSuccessStatus: 200,
-  credentials: true
-}));
+app.use(nocache())
+
+
+// app.use(cors({
+//   origin: 'http://localhost:3000',
+//   optionsSuccessStatus: 200,
+//   credentials: true
+// }));
 
 // Middleware Setup
 app.use(logger('dev'));
@@ -30,9 +34,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use((req, res, next) => {
+  console.log('BEFORE express.static');
+  next()
+})
+
 // Set the public folder to "~/client/build/"
 // Example: http://localhost:5000/favicon.ico => Display "~/client/build/favicon.ico"
 app.use(express.static(path.join(__dirname, '../client/build')));
+
+
+app.use((req, res, next) => {
+  console.log('AFTER express.static');
+  next()
+})
 
 // Enable authentication using session + passport
 app.use(session({
@@ -42,6 +57,12 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 require('./passport')(app);
+
+app.get('/api/countries', (req, res, next) => {
+  console.log('DEBUG GET /api/countries');
+
+  next()
+})
 
 
 app.use('/api', require('./routes/index'));
