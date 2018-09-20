@@ -7,6 +7,7 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
+      message: null
     }
   }
 
@@ -23,9 +24,7 @@ class Login extends Component {
         console.log('SUCCESS!')
         this.props.history.push("/") // Redirect to the home page
       })
-      .catch(err => {
-        console.log('ERROR')
-      })
+      .catch(err => this.setState({ message: err.response.data.message }))
   }
 
   render() {
@@ -37,6 +36,9 @@ class Login extends Component {
           Password: <input type="password" value={this.state.password} onChange={(e) => this.handleInputChange("password", e)} /> <br />
           <button onClick={(e) => this.handleClick(e)}>Login</button>
         </form>
+        {this.state.message && <div className="info info-danger">
+          {this.state.message}
+        </div>}
       </div>
     );
   }

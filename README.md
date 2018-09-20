@@ -29,11 +29,11 @@ README.md
 
 You should have a `server/.env` file, with for example the following values:
 ```
+PORT=5000
+MONGODB_URI=......
 CLOUDINARY_CLOUD_NAME=......
 CLOUDINARY_API_KEY=......
 CLOUDINARY_API_SECRET=......
-JWT_SECRET=......
-MONGODB_URI=......
 ```
 
 
@@ -170,4 +170,28 @@ $ heroku addons:open mongolab
 $ heroku logs
 ```
 
+## Guideline to create a good code
+
+### Send the write status code
+
+Your backend API sends some status code at every request. By default, it will send `200`, which means `OK`, everything went fine.
+
+If something bad happened, you should a send a different status code:
+- **`401` Unauthorized**: For missing or bad authentication.
+- **`403` Forbidden**: When the user is authenticated but isn’t authorized to perform the requested operation on the given resource.
+- **`404` Not Found**: The resources/route doesn't exist
+- **`500` Internal Server Error**: The server encountered an unexpected condition which prevented it from fulfilling the request.
+
+
+By sending the write status code, you will catch more easily your error on the client side.
+
+Example:
+```js
+// Call to api.getSecret()
+//   In case of success, state.secret is saved
+//   In case of error (status code 4xx or 5xx), state.message contains the message from the error
+api.getSecret()
+  .then(data => this.setState({ secret: data.secret }))
+  .catch(err => this.setState({ message: err.response.data.message }))
+```
 
