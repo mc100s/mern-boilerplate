@@ -50,13 +50,13 @@ app.use((req, res, next) => {
 })
 
 // Enable authentication using session + passport
-app.use(session({
-  secret: 'irongenerator',
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
-}))
-require('./passport')(app);
+// app.use(session({
+//   secret: 'irongenerator',
+//   resave: true,
+//   saveUninitialized: true,
+//   store: new MongoStore({ mongooseConnection: mongoose.connection })
+// }))
+// require('./passport')(app);
 
 app.get('/api/countries', (req, res, next) => {
   console.log('DEBUG GET /api/countries');
