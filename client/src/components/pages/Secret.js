@@ -13,7 +13,10 @@ class Secret extends Component {
     return (
       <div className="Secret">
         <h2>Secret</h2>
-        {this.state.secret}
+
+        <div className="result">
+          {this.state.secret}
+        </div>
 
         {this.state.message && <div className="info info-danger">
           {this.state.message}

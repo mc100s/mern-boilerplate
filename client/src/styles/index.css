@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif; }
+
+.info {
+  margin: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  background-color: #5776e9;
+  color: white; }
+
+.info.info-danger {
+  background-color: #e73f3f; }
+
+.App {
+  text-align: center; }
+  .App .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px; }
+  .App .App-header {
+    background-color: #32c3ff;
+    padding: 20px;
+    color: white; }
+    .App .App-header a {
+      color: white;
+      padding: 0 5px;
+      text-decoration: unset; }
+    .App .App-header a.active {
+      font-weight: bold; }
+  .App .App-title {
+    font-size: 1.5em; }
+  .App .App-intro {
+    font-size: large; }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+.Home p {
+  font-size: 1.2em; }
+
+.Secret .result {
+  font-size: 1.2em;
+  color: #32c3ff; }

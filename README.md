@@ -10,6 +10,8 @@ client/
   build/
   public/
   src/
+    components/
+    styles/
   package.json
 server/
   bin/
