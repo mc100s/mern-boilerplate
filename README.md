@@ -1,6 +1,5 @@
 # MERN boilerplate | Ironhack Fullstack Application
 
-
 ## Global information
 
 ### Directory structure
@@ -32,6 +31,7 @@ README.md
 You should have a `server/.env` file, with for example the following values:
 ```
 PORT=5000
+SESSION_SECRET=anyValue
 MONGODB_URI=......
 CLOUDINARY_CLOUD_NAME=......
 CLOUDINARY_API_KEY=......
@@ -196,6 +196,9 @@ Example:
 //   In case of error (status code 4xx or 5xx), state.message contains the message from the error
 api.getSecret()
   .then(data => this.setState({ secret: data.secret }))
-  .catch(err => this.setState({ message: err.response.data.message }))
+  .catch(err => this.setState({ message: err.toString() }))
 ```
 
+
+
+<!-- TODO: find a way to check if we are still loggedIn when we load the application -->

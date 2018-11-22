@@ -46,7 +46,7 @@ class AddCountry extends Component {
           })
         }, 2000)
       })
-      .catch(err => this.setState({ message: err.response.data.message }))
+      .catch(err => this.setState({ message: err.toString() }))
   }
   render() {
     return (

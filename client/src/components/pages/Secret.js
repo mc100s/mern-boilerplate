@@ -27,7 +27,7 @@ class Secret extends Component {
   componentDidMount() {
     api.getSecret()
       .then(data => this.setState({ secret: data.secret }))
-      .catch(err => this.setState({ message: err.response.data.message }))
+      .catch(err => this.setState({ message: err.toString() }))
   }
 }
 
