@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from '../../api';
-// import './AddCountry.css';
 
 
 class AddCountry extends Component {
@@ -48,9 +46,7 @@ class AddCountry extends Component {
           })
         }, 2000)
       })
-      .catch(err => {
-        console.log('ERROR')
-      })
+      .catch(err => this.setState({ message: err.response.data.message }))
   }
   render() {
     return (
@@ -63,13 +59,9 @@ class AddCountry extends Component {
           Description: <textarea value={this.state.description} cols="30" rows="10" onChange={(e) => { this.handleInputChange("description", e) }} ></textarea> <br />
           <button onClick={(e) => this.handleClick(e)}>Create country</button>
         </form>
-        <div style={{
-          margin: 10,
-          backgroundColor: "red",
-          display: this.state.message ? "block" : "none"
-        }}>
+        {this.state.message && <div className="info">
           {this.state.message}
-        </div>
+        </div>}
       </div>
     );
   }

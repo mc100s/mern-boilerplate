@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Countries from './pages/Countries';
 import AddCountry from './pages/AddCountry';
@@ -8,7 +8,6 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import api from '../api';
 import logo from '../logo.svg';
-import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -28,14 +27,14 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React Countries</h1>
-          <Link to="/">Home</Link>
-          <Link to="/countries">Countries</Link>
-          <Link to="/add-country">Add country</Link>
-          {!api.isLoggedIn() && <Link to="/signup">Signup</Link>}
-          {!api.isLoggedIn() && <Link to="/login">Login</Link>}
-          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
-          <Link to="/secret">Secret</Link>
+          <h1 className="App-title">MERN Boilerplate</h1>
+          <NavLink to="/" exact>Home</NavLink>
+          <NavLink to="/countries">Countries</NavLink>
+          <NavLink to="/add-country">Add country</NavLink>
+          {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
+          {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
+          {api.isLoggedIn() && <NavLink to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</NavLink>}
+          <NavLink to="/secret">Secret</NavLink>
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
