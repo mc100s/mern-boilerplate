@@ -60,8 +60,10 @@ $ git remote add origin <https://github.com/user/my-project.git>
 
 **To install all the packages**
 ```sh
+# Install server and client packages + build the React applicatin
 $ npm install
-# OR
+
+# OR you can install manually the server and client packages
 $ (cd server && npm install)
 $ (cd client && npm install)
 ```
@@ -69,13 +71,13 @@ $ (cd client && npm install)
 **To install a package for the server**
 ```sh
 $ cd server
-$ npm install --save axios
+$ npm install axios
 ```
 
 **To install a package for the client**
 ```sh
 $ cd client
-$ npm install --save axios
+$ npm install axios
 ```
 
 **To run the server and the client**
