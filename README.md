@@ -1,5 +1,13 @@
 # MERN boilerplate | Ironhack Fullstack Application
 
+- [Global information](#global-information)
+- [Commands](#commands)
+- [How to implement a Full Stack feature?](#how-to-implement-a-full-stack-feature)
+- [Example in the code](#example-in-the-code)
+- [Deployement on Heroku](#deployement-on-heroku)
+- [Guideline to create a good code](#guideline-to-create-a-good-code)
+
+
 ## Global information
 
 ### Directory structure
@@ -97,6 +105,12 @@ So now you can go to
 - http://localhost:3000/: The last version of your React application that is calling your API with the base url "http://localhost:5000/api/"
 
 
+## How to implement a Full Stack feature?
+1. Implement it in the sever by creating a route and some models if necessary
+2. Test it with Postman with many different cases
+3. Create a new API method in `client/src/api.js`
+4. Consume the API method in your client :)
+
 ## Example in the code
 
 ### `server/routes/auth.js`
@@ -181,15 +195,21 @@ $ heroku logs
 Your backend API sends some status code at every request. By default, it will send `200`, which means `OK`, everything went fine.
 
 If something bad happened, you should a send a different status code:
+- **`400` Bad Request**: Something is missing in wrong in the request (eg: missing data).
 - **`401` Unauthorized**: For missing or bad authentication.
 - **`403` Forbidden**: When the user is authenticated but isn’t authorized to perform the requested operation on the given resource.
-- **`404` Not Found**: The resources/route doesn't exist
+- **`404` Not Found**: The resources/route doesn't exist.
+- **`409` Conflict**: The request couldn't be completed because of a conflict (eg for signup: username already taken).
 - **`500` Internal Server Error**: The server encountered an unexpected condition which prevented it from fulfilling the request.
-
 
 By sending the write status code, you will catch more easily your error on the client side.
 
-Example:
+**Example on the server side**
+```js
+// If the user is not connected for a protected resource, we can send him this
+res.status(401).json({ message: "You must be connected" })
+```
+**Example on the client side**
 ```js
 // Call to api.getSecret()
 //   In case of success, state.secret is saved

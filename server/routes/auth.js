@@ -10,13 +10,13 @@ const bcryptSalt = 10
 router.post("/signup", (req, res, next) => {
   const { username, password, name } = req.body
   if (!username || !password) {
-    res.status(401).json({ message: "Indicate username and password" })
+    res.status(400).json({ message: "Indicate username and password" })
     return
   }
   User.findOne({ username })
     .then(userDoc => {
       if (userDoc !== null) {
-        res.status(401).json({ message: "The username already exists" })
+        res.status(409).json({ message: "The username already exists" })
         return
       }
       const salt = bcrypt.genSaltSync(bcryptSalt)
