@@ -5,7 +5,7 @@
 - [How to implement a Full Stack feature?](#how-to-implement-a-full-stack-feature)
 - [Example in the code](#example-in-the-code)
 - [Deployement on Heroku](#deployement-on-heroku)
-- [Guideline to create a good code](#guideline-to-create-a-good-code)
+- [Guideline to create clean code](#guideline-to-create-clean-code)
 
 
 ## Global information
@@ -188,7 +188,7 @@ $ heroku addons:open mongolab
 $ heroku logs
 ```
 
-## Guideline to create a good code
+## Guideline to create clean code
 
 ### Send the write status code
 
