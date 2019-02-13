@@ -63,7 +63,7 @@ router.post("/login", (req, res, next) => {
       // (that saves the USER ID in the session)
       req.logIn(userDoc, () => {
         // hide "encryptedPassword" before sending the JSON (it's a security risk)
-        userDoc.encryptedPassword = undefined
+        userDoc.password = undefined
         res.json(userDoc)
       })
     })
