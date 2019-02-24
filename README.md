@@ -1,53 +1,13 @@
 # MERN boilerplate | Ironhack Fullstack Application
 
 - [Global information](#global-information)
-- [Commands](#commands)
+- [Setups and execution of the project](#setups-and-execution-of-the-project)
 - [How to implement a Full Stack feature?](#how-to-implement-a-full-stack-feature)
 - [Example in the code](#example-in-the-code)
 - [Deployement on Heroku](#deployement-on-heroku)
 - [Guideline to create clean code](#guideline-to-create-clean-code)
 
-
-## Global information
-
-### Directory structure
-```
-.vscode/
-client/
-  build/
-  public/
-  src/
-    components/
-    styles/
-  package.json
-server/
-  bin/
-  configs/
-  models/
-  passport/
-  routes/
-  app.js
-  middlewares.js
-  package.json
-.gitignore
-package.json
-README.md
-```
-
-### Files to add
-
-You should have a `server/.env` file, with for example the following values:
-```
-PORT=5000
-SESSION_SECRET=anyValue
-MONGODB_URI=......
-CLOUDINARY_CLOUD_NAME=......
-CLOUDINARY_API_KEY=......
-CLOUDINARY_API_SECRET=......
-```
-
-
-## Commands
+## Set up and execution of the project
 
 **To download the boilerplate and link it with your GitHub project**
 
@@ -103,6 +63,47 @@ So now you can go to
 - http://localhost:5000/api/: A simple API call
 - http://localhost:5000/: The website based on client/build (that you can update with `$ (cd client && npm run build)`)
 - http://localhost:3000/: The last version of your React application that is calling your API with the base url "http://localhost:5000/api/"
+
+
+
+## Global information
+
+### Directory structure
+```
+.vscode/
+client/
+    build/
+    public/
+    src/
+        components/
+            pages/
+    package.json
+server/
+    bin/
+    configs/
+    models/
+    passport/
+    routes/
+    app.js
+    middlewares.js
+    package.json
+.gitignore
+package.json
+README.md
+```
+
+### Files to add
+
+You should have a `server/.env` file, with for example the following values:
+```
+PORT=5000
+SESSION_SECRET=anyValue
+MONGODB_URI=......
+CLOUDINARY_CLOUD_NAME=......
+CLOUDINARY_API_KEY=......
+CLOUDINARY_API_SECRET=......
+```
+
 
 
 ## How to implement a Full Stack feature?
