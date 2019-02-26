@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import api from '../../api';
 
 
-class AddCountry extends Component {
+export default class AddCountry extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -12,13 +12,13 @@ class AddCountry extends Component {
       description: "",
       message: null
     }
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  handleInputChange(stateFieldName, event) {
-    let newState = {}
-    newState[stateFieldName] = event.target.value
-
-    this.setState(newState)
+  handleInputChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
   }
 
   handleClick(e) {
@@ -30,7 +30,7 @@ class AddCountry extends Component {
       area: this.state.area,
       description: this.state.description,
     }
-    api.postCountries(data)
+    api.addCountry(data)
       .then(result => {
         console.log('SUCCESS!')
         this.setState({
@@ -53,10 +53,10 @@ class AddCountry extends Component {
       <div className="AddCountry">
         <h2>Add country</h2>
         <form>
-          Name: <input type="text" value={this.state.name} onChange={(e) => { this.handleInputChange("name", e) }} /> <br />
-          Capitals: <input type="text" value={this.state.capitals} onChange={(e) => { this.handleInputChange("capitals", e) }} /> <br />
-          Area: <input type="number" value={this.state.area} onChange={(e) => { this.handleInputChange("area", e) }} /> <br />
-          Description: <textarea value={this.state.description} cols="30" rows="10" onChange={(e) => { this.handleInputChange("description", e) }} ></textarea> <br />
+          Name: <input type="text" value={this.state.name} name="name" onChange={this.handleInputChange} /> <br />
+          Capitals: <input type="text" value={this.state.capitals} name="capitals" onChange={this.handleInputChange} /> <br />
+          Area: <input type="number" value={this.state.area} name="area" onChange={this.handleInputChange} /> <br />
+          Description: <textarea value={this.state.description} name="description" cols="30" rows="10" onChange={this.handleInputChange} ></textarea> <br />
           <button onClick={(e) => this.handleClick(e)}>Create country</button>
         </form>
         {this.state.message && <div className="info">
@@ -66,5 +66,3 @@ class AddCountry extends Component {
     );
   }
 }
-
-export default AddCountry;

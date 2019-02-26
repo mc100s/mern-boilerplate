@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 
-class Login extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -9,11 +9,12 @@ class Login extends Component {
       password: "",
       message: null
     }
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  handleInputChange(stateFieldName, event) {
+  handleInputChange(event) {
     this.setState({
-      [stateFieldName]: event.target.value
+      [event.target.name]: event.target.value
     })
   }
 
@@ -32,8 +33,8 @@ class Login extends Component {
       <div className="Login">
         <h2>Login</h2>
         <form>
-          Username: <input type="text" value={this.state.username} onChange={(e) => this.handleInputChange("username", e)} /> <br />
-          Password: <input type="password" value={this.state.password} onChange={(e) => this.handleInputChange("password", e)} /> <br />
+          Username: <input type="text" value={this.state.username} name="username" onChange={this.handleInputChange} /> <br />
+          Password: <input type="password" value={this.state.password} name="password" onChange={this.handleInputChange} /> <br />
           <button onClick={(e) => this.handleClick(e)}>Login</button>
         </form>
         {this.state.message && <div className="info info-danger">
@@ -43,5 +44,3 @@ class Login extends Component {
     );
   }
 }
-
-export default Login;

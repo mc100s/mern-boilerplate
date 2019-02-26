@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 
-class Countries extends Component {
+export default class Countries extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -27,5 +27,3 @@ class Countries extends Component {
       .catch(err => console.log(err))
   }
 }
-
-export default Countries;

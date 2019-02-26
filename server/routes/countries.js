@@ -3,12 +3,6 @@ const Country = require('../models/Country')
 
 const router = express.Router();
 
-
-router.use((req, res, next) => {
-  console.log('DEBUG routes/countries');
-  next()
-})
-
 // Route to get all countries
 router.get('/', (req, res, next) => {
   Country.find()

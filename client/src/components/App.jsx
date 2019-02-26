@@ -9,13 +9,12 @@ import Signup from './pages/Signup';
 import api from '../api';
 import logo from '../logo.svg';
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       countries: []
     }
-    // api.loadUser();
   }
 
   handleLogoutClick(e) {
@@ -49,5 +48,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

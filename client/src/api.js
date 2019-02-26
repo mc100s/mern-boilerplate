@@ -17,10 +17,19 @@ const errHandler = err => {
 export default {
   service: service,
 
+  // This method is synchronous and returns true or false
+  // To know if the user is connected, we just check if we have a value for localStorage.getItem('user')
   isLoggedIn() {
     return localStorage.getItem('user') != null
   },
 
+  // This method returns the user from the localStorage
+  // Be careful, the value is the one when the user logged in for the last time
+  getLocalStorageUser() {
+    return JSON.parse(localStorage.getItem('user'))
+  },
+
+  // This method signs up and logs in the user
   signup(userInfo) {
     return service
       .post('/signup', userInfo)
@@ -52,6 +61,8 @@ export default {
       .get('/logout')
   },
 
+  // This is an example on how to use this method in a different file
+  // api.getCountries().then(countries => { /* ... */ })
   getCountries() {
     return service
       .get('/countries')
@@ -59,9 +70,9 @@ export default {
       .catch(errHandler)
   },
 
-  postCountries(data) {
+  addCountry(body) {
     return service
-      .post('/countries', data)
+      .post('/countries', body)
       .then(res => res.data)
       .catch(errHandler)
   },
@@ -72,8 +83,6 @@ export default {
       .then(res => res.data)
       .catch(errHandler)
   },
-
-
 
   addPicture(file) {
     const formData = new FormData()
