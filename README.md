@@ -191,7 +191,7 @@ $ heroku logs
 
 ## Guideline to create clean code
 
-### Send the write status code
+### Send the right status code
 
 Your backend API sends some status code at every request. By default, it will send `200`, which means `OK`, everything went fine.
 
@@ -203,7 +203,7 @@ If something bad happened, you should a send a different status code:
 - **`409` Conflict**: The request couldn't be completed because of a conflict (eg for signup: username already taken).
 - **`500` Internal Server Error**: The server encountered an unexpected condition which prevented it from fulfilling the request.
 
-By sending the write status code, you will catch more easily your error on the client side.
+By sending the right status code, you will catch more easily your error on the client side.
 
 **Example on the server side**
 ```js
