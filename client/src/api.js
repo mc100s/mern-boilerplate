@@ -1,14 +1,17 @@
 import axios from 'axios'
 
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api',
-  withCredentials: true
+  baseURL:
+    process.env.NODE_ENV === 'production'
+      ? '/api'
+      : 'http://localhost:5000/api',
+  withCredentials: true,
 })
 
 const errHandler = err => {
   console.error(err)
   if (err.response && err.response.data) {
-    console.error("API response", err.response.data)
+    console.error('API response', err.response.data)
     throw err.response.data.message
   }
   throw err
@@ -57,8 +60,7 @@ export default {
 
   logout() {
     localStorage.removeItem('user')
-    return service
-      .get('/logout')
+    return service.get('/logout')
   },
 
   // This is an example on how to use this method in a different file
@@ -86,7 +88,7 @@ export default {
 
   addPicture(file) {
     const formData = new FormData()
-    formData.append("picture", file)
+    formData.append('picture', file)
     return service
       .post('/endpoint/to/add/a/picture', formData, {
         headers: {

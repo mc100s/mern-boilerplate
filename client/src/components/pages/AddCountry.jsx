@@ -1,23 +1,22 @@
-import React, { Component } from 'react';
-import api from '../../api';
-
+import React, { Component } from 'react'
+import api from '../../api'
 
 export default class AddCountry extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: "",
-      capitals: "",
-      area: "",
-      description: "",
-      message: null
+      name: '',
+      capitals: '',
+      area: '',
+      description: '',
+      message: null,
     }
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   handleInputChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     })
   }
 
@@ -30,19 +29,20 @@ export default class AddCountry extends Component {
       area: this.state.area,
       description: this.state.description,
     }
-    api.addCountry(data)
+    api
+      .addCountry(data)
       .then(result => {
         console.log('SUCCESS!')
         this.setState({
-          name: "",
-          capitals: "",
-          area: "",
-          description: "",
-          message: `Your country '${this.state.name}' has been created`
+          name: '',
+          capitals: '',
+          area: '',
+          description: '',
+          message: `Your country '${this.state.name}' has been created`,
         })
         setTimeout(() => {
           this.setState({
-            message: null
+            message: null,
           })
         }, 2000)
       })
@@ -53,16 +53,43 @@ export default class AddCountry extends Component {
       <div className="AddCountry">
         <h2>Add country</h2>
         <form>
-          Name: <input type="text" value={this.state.name} name="name" onChange={this.handleInputChange} /> <br />
-          Capitals: <input type="text" value={this.state.capitals} name="capitals" onChange={this.handleInputChange} /> <br />
-          Area: <input type="number" value={this.state.area} name="area" onChange={this.handleInputChange} /> <br />
-          Description: <textarea value={this.state.description} name="description" cols="30" rows="10" onChange={this.handleInputChange} ></textarea> <br />
-          <button onClick={(e) => this.handleClick(e)}>Create country</button>
+          Name:{' '}
+          <input
+            type="text"
+            value={this.state.name}
+            name="name"
+            onChange={this.handleInputChange}
+          />{' '}
+          <br />
+          Capitals:{' '}
+          <input
+            type="text"
+            value={this.state.capitals}
+            name="capitals"
+            onChange={this.handleInputChange}
+          />{' '}
+          <br />
+          Area:{' '}
+          <input
+            type="number"
+            value={this.state.area}
+            name="area"
+            onChange={this.handleInputChange}
+          />{' '}
+          <br />
+          Description:{' '}
+          <textarea
+            value={this.state.description}
+            name="description"
+            cols="30"
+            rows="10"
+            onChange={this.handleInputChange}
+          />{' '}
+          <br />
+          <button onClick={e => this.handleClick(e)}>Create country</button>
         </form>
-        {this.state.message && <div className="info">
-          {this.state.message}
-        </div>}
+        {this.state.message && <div className="info">{this.state.message}</div>}
       </div>
-    );
+    )
   }
 }

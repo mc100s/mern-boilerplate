@@ -1,22 +1,22 @@
-const express = require("express")
+const express = require('express')
 const passport = require('passport')
 const router = express.Router()
-const User = require("../models/User")
+const User = require('../models/User')
 
 // Bcrypt to encrypt passwords
-const bcrypt = require("bcrypt")
+const bcrypt = require('bcrypt')
 const bcryptSalt = 10
 
-router.post("/signup", (req, res, next) => {
+router.post('/signup', (req, res, next) => {
   const { username, password, name } = req.body
   if (!username || !password) {
-    res.status(400).json({ message: "Indicate username and password" })
+    res.status(400).json({ message: 'Indicate username and password' })
     return
   }
   User.findOne({ username })
     .then(userDoc => {
       if (userDoc !== null) {
-        res.status(409).json({ message: "The username already exists" })
+        res.status(409).json({ message: 'The username already exists' })
         return
       }
       const salt = bcrypt.genSaltSync(bcryptSalt)
@@ -30,14 +30,14 @@ router.post("/signup", (req, res, next) => {
       // (that saves the USER ID in the session)
       req.logIn(userSaved, () => {
         // hide "encryptedPassword" before sending the JSON (it's a security risk)
-        userSaved.password = undefined;
-        res.json( userSaved );
-      });
+        userSaved.password = undefined
+        res.json(userSaved)
+      })
     })
     .catch(err => next(err))
 })
 
-router.post("/login", (req, res, next) => {
+router.post('/login', (req, res, next) => {
   const { username, password } = req.body
 
   // first check to see if there's a document with that username
@@ -46,7 +46,7 @@ router.post("/login", (req, res, next) => {
       // "userDoc" will be empty if the username is wrong (no document in database)
       if (!userDoc) {
         // create an error object to send to our error handler with "next()"
-        next(new Error("Incorrect username "))
+        next(new Error('Incorrect username '))
         return
       }
 
@@ -54,7 +54,7 @@ router.post("/login", (req, res, next) => {
       // "compareSync()" will return false if the "password" is wrong
       if (!bcrypt.compareSync(password, userDoc.password)) {
         // create an error object to send to our error handler with "next()"
-        next(new Error("Password is wrong"))
+        next(new Error('Password is wrong'))
         return
       }
 
@@ -82,7 +82,7 @@ router.post('/login-with-passport-local-strategy', (req, res, next) => {
       return
     }
 
-    req.login(theUser, (err) => {
+    req.login(theUser, err => {
       if (err) {
         res.status(500).json({ message: 'Something went wrong' })
         return
@@ -94,7 +94,7 @@ router.post('/login-with-passport-local-strategy', (req, res, next) => {
   })(req, res, next)
 })
 
-router.get("/logout", (req, res) => {
+router.get('/logout', (req, res) => {
   req.logout()
   res.json({ message: 'You are out!' })
 })
